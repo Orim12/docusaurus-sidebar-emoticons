@@ -1,13 +1,31 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { tagEmojis, rootFoldersNoEmoji as rootFoldersNoEmojiArray } from './config.js';
 
-const rootFoldersNoEmoji = new Set(rootFoldersNoEmojiArray);
+const defaultTagEmojis = {
+  'structure': '📐',
+  'guide': '📖',
+  'code-example': '💻',
+  'wips': '🚧🏁',
+  'wip': '🚧',
+  'tutorial': '🎓',
+  'blocks': '🧱',
+  'configuration': '⚙️',
+  'optimization': '⚡',
+  'collections': '📚',
+  'reference': '➡️📖',
+  'hooks': '🪝',
+  'security': '🔒',
+  'setup': '🛠️',
+};
 
-export default async function myPlugin(context, options) {
+export default async function sidebarEmoticonPlugin(context, options = {}) {
+  // Use options provided in docusaurus.config.ts, or fall back to defaults
+  const tagEmojis = options.tagEmojis || defaultTagEmojis;
+  const rootFoldersNoEmoji = new Set(options.rootFoldersNoEmoji || []);
+
   return {
-    name: 'my-plugin',
+    name: 'docusaurus-sidebar-emoticons',
     async loadContent() {
       try {
         const docsPath = path.join(context.siteDir, 'docs');

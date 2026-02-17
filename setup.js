@@ -1,18 +1,25 @@
-const fs = require('fs');
-const path = require('path');
+#!/usr/bin/env node
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const repoRoot = path.resolve(__dirname, '..');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const packageRoot = path.resolve(__dirname);
 const sourceCandidates = [
-  path.join(__dirname, 'theme', 'root.tsx'),
-  path.join(__dirname, 'theme', 'Root.tsx'),
+  path.join(packageRoot, 'theme', 'root.tsx'),
+  path.join(packageRoot, 'theme', 'Root.tsx'),
 ];
-const destDir = path.join(repoRoot, 'src', 'theme');
+
+const consumerRoot = process.cwd();
+const destDir = path.join(consumerRoot, 'src', 'theme');
 const destPath = path.join(destDir, 'Root.tsx');
 
 const sourcePath = sourceCandidates.find((candidate) => fs.existsSync(candidate));
 
 if (!sourcePath) {
-  console.error('No theme/root.tsx or theme/Root.tsx found in sidebarEmoticon.');
+  console.error('No theme/root.tsx or theme/Root.tsx found in this package.');
   process.exit(1);
 }
 
@@ -23,4 +30,4 @@ if (!fs.existsSync(destDir)) {
 // Copy to keep the original file intact across platforms.
 fs.copyFileSync(sourcePath, destPath);
 
-console.log(`Copied ${path.relative(repoRoot, sourcePath)} -> ${path.relative(repoRoot, destPath)}`);
+console.log(`Copied ${path.relative(consumerRoot, sourcePath)} -> ${path.relative(consumerRoot, destPath)}`);

@@ -1,13 +1,42 @@
 {
   "name": "sidebar-emoticon-plugin",
+  "description": "Docusaurus plugin that adds emoticons to the sidebar.",
   "version": "1.0.0",
   "main": "index.js",
+  "bin": {
+    "sidebar-emoticon-plugin": "setup.js"
+  },
+  "type": "module",
   "scripts": {
     "setup": "node setup.js"
   },
-  "private": true,
-  "license": "GNU GPL v3",
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  },
+  "license": "GPL-3.0-only",
   "maintainers": [
     "Orim12"
+  ],
+  "author": "Orim12",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Orim12/docusaurus-sidebar-emoticons.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Orim12/docusaurus-sidebar-emoticons/issues"
+  },
+  "homepage": "https://github.com/Orim12/docusaurus-sidebar-emoticons#readme",
+  "keywords": [
+    "docusaurus",
+    "docusaurus-plugin",
+    "sidebar",
+    "emoticons",
+    "emoji"
+  ],
+  "files": [
+    "index.js",
+    "setup.js",
+    "theme",
+    "LICENSE"
   ]
 }
