@@ -34,8 +34,8 @@ export default {
       'sidebar-emoticon-plugin',
       {
         tagEmojis: {
-          guide: '📖',
-          tutorial: '🎓',
+          'guide': '📖',
+          'tutorial': '🎓',
           'code-example': '💻',
           // Add your custom tag-to-emoticon mappings
         },
@@ -47,10 +47,20 @@ export default {
 };
 ```
 
-2. Copy the theme override into your site:
+2. Add a setup script to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "sidebar-emoticon-setup": "sidebar-emoticon-plugin"
+  }
+}
+```
+
+3. Run the setup script to copy the theme override:
 
 ```bash
-npm run setup
+npm run sidebar-emoticon-setup
 ```
 
 This copies [theme/Root.tsx](theme/Root.tsx) into your site at `src/theme/Root.tsx`.
