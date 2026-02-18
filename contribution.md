@@ -2,11 +2,11 @@
 
 Thank you for your interest in contributing!
 
-- Fork the repository and create a feature branch from `master`.
+- Fork the repository and create a feature branch from `main`.
 - Make small, focused commits with clear messages.
 - Follow the existing code style; format with Prettier/ESLint if present.
 - Open an issue before making large changes, or link the PR to an existing issue.
-- Describe in the PR what you changed and why, including reproducible steps.
+- Describe in the PR what you changed and why.
 
 By contributing you agree to the project's license.
 
