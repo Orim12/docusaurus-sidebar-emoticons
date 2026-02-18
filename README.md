@@ -72,7 +72,10 @@ Add tags to your docs front matter. The first tag is used to select an emoticon.
 ```md
 ---
 title: Example
-tags: [guide]
+tags:
+  - structure
+  - guide
+  - code-example
 ---
 ```
 
@@ -87,6 +90,54 @@ Pass configuration options to the plugin in your Docusaurus config:
 
 - The plugin scans `docs/` during build and creates `static/sidebar-emoticons.json`.
 - The Root theme component loads that JSON and annotates sidebar links.
+
+## Testing locally (developer)
+
+Follow one of these approaches to test the plugin with a local Docusaurus site.
+
+1) Quick link (recommended for iterative development)
+
+```bash
+# In the plugin repo
+npm install
+npm link
+
+# In your Docusaurus site repo
+npm link sidebar-emoticon-plugin
+npm install
+npm run start # or `yarn start`
+```
+
+Then add the plugin to your site's `docusaurus.config.js` (see Setup above) and verify that `static/sidebar-emoticons.json` is generated and the sidebar shows emoticons.
+
+2) Pack and install (closer to a release install)
+
+```bash
+# In the plugin repo
+npm install
+npm pack
+
+# In your Docusaurus site repo
+npm install /path/to/sidebar-emoticon-plugin-<version>.tgz
+npm run start
+```
+
+3) Run the setup script to copy the theme override
+
+After installing the plugin into your site, you can run the setup script that copies `theme/Root.tsx` into your site. Add the script to your site's `package.json` as described in Setup, then run:
+
+```bash
+npm run sidebar-emoticon-setup
+# or, if you installed the plugin globally with `npm link`, run:
+npx sidebar-emoticon-plugin
+```
+
+Verification
+
+- Confirm `static/sidebar-emoticons.json` exists in the built site or in `build` when running locally.
+- Check the browser UI for emoticons appearing next to sidebar items.
+- Inspect browser console for plugin warnings about missing tags.
+
 
 ## License
 

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
+/* prettier-ignore */
 const defaultTagEmojis = {
   'structure': '📐',
   'guide': '📖',
@@ -41,7 +42,9 @@ export default async function sidebarEmoticonPlugin(context, options = {}) {
             const stat = fs.statSync(filePath);
             if (stat.isDirectory() && file !== '_docsinfo') {
               // Record all folders
-              const relFolder = path.relative(docsPath, filePath).replace(/\\/g, '/');
+              const relFolder = path
+                .relative(docsPath, filePath)
+                .replace(/\\/g, '/');
               allFolders.add(relFolder);
               walkDir(filePath);
             } else if (file.endsWith('.md') || file.endsWith('.mdx')) {
@@ -55,25 +58,27 @@ export default async function sidebarEmoticonPlugin(context, options = {}) {
         const docsWithTags = {};
         const sidebarLabels = {};
         const allDocTags = {};
-        
+
         // First pass: add emoticons for docs with tags
         allFiles.forEach(filePath => {
           const content = fs.readFileSync(filePath, 'utf-8');
           const { data } = matter(content);
-          const relativePath = path.relative(docsPath, filePath).replace(/\\/g, '/');
+          const relativePath = path
+            .relative(docsPath, filePath)
+            .replace(/\\/g, '/');
           let docId = relativePath.replace(/\.(md|mdx)$/, '');
           allDocTags[relativePath] = Array.isArray(data.tags) ? data.tags : [];
-          
+
           // For index files, use the folder path as the ID
           if (docId.endsWith('/index')) {
             docId = docId.replace('/index', '');
           }
-          
+
           if (data.tags && data.tags.length > 0) {
             docsWithTags[relativePath] = data.tags;
             const firstTag = data.tags[0];
             const emoticon = tagEmojis[firstTag] || '📌';
-            
+
             sidebarLabels[docId] = emoticon;
 
             if (data.slug) {
@@ -84,7 +89,7 @@ export default async function sidebarEmoticonPlugin(context, options = {}) {
                 sidebarLabels[slugPath] = emoticon;
               }
             }
-            
+
             // Add emoticon for all parent paths
             const parts = docId.split('/');
             for (let i = 1; i < parts.length; i++) {
@@ -121,18 +126,18 @@ export default async function sidebarEmoticonPlugin(context, options = {}) {
         allFolders.forEach(folder => {
           const folderName = folder.split('/').pop();
           const categoryKey = `category/${folderName}`;
-          
+
           // If this folder has an emoticon, add it for the category path too
           if (sidebarLabels[folder]) {
             categoryMap[categoryKey] = sidebarLabels[folder];
           }
         });
-        
+
         // Merge category mappings
         Object.assign(sidebarLabels, categoryMap);
 
         // Remove emoticons for root folders that already have manual emojis
-        rootFoldersNoEmoji.forEach((folder) => {
+        rootFoldersNoEmoji.forEach(folder => {
           delete sidebarLabels[folder];
           delete sidebarLabels[`category/${folder}`];
         });
@@ -167,7 +172,7 @@ export default async function sidebarEmoticonPlugin(context, options = {}) {
         return {};
       }
     },
-    async contentLoaded({content, actions}) {
+    async contentLoaded({ content, actions }) {
       // Plugin loaded silently
     },
   };

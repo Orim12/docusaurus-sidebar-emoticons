@@ -16,7 +16,7 @@ const consumerRoot = process.cwd();
 const destDir = path.join(consumerRoot, 'src', 'theme');
 const destPath = path.join(destDir, 'Root.tsx');
 
-const sourcePath = sourceCandidates.find((candidate) => fs.existsSync(candidate));
+const sourcePath = sourceCandidates.find(candidate => fs.existsSync(candidate));
 
 if (!sourcePath) {
   console.error('No theme/root.tsx or theme/Root.tsx found in this package.');
@@ -30,4 +30,9 @@ if (!fs.existsSync(destDir)) {
 // Copy to keep the original file intact across platforms.
 fs.copyFileSync(sourcePath, destPath);
 
-console.log(`Copied ${path.relative(consumerRoot, sourcePath)} -> ${path.relative(consumerRoot, destPath)}`);
+console.log(
+  `Copied ${path.relative(consumerRoot, sourcePath)} -> ${path.relative(
+    consumerRoot,
+    destPath
+  )}`
+);

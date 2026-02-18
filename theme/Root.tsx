@@ -24,19 +24,20 @@ export default function Root({ children }) {
         .replace(/\/$/, '');
 
       // Get all sidebar items - both category labels and doc links
-      const sidebarItems = document.querySelectorAll('[class*="sidebar"] a, .menu__link');
-      
-      sidebarItems.forEach((link) => {
+      const sidebarItems = document.querySelectorAll(
+        '[class*="sidebar"] a, .menu__link'
+      );
+
+      sidebarItems.forEach(link => {
         const text = link.textContent;
 
-        
         // Skip if already decorated
         if (link.getAttribute('data-emoji')) {
           return;
         }
 
         const href = link.getAttribute('href');
-        
+
         let docId = '';
 
         if (!href) {
@@ -122,5 +123,3 @@ export default function Root({ children }) {
 
   return <>{children}</>;
 }
-
-

@@ -1,4 +1,3 @@
-
 # Contributing
 
 Thank you for your interest in contributing!
@@ -22,4 +21,3 @@ If you have questions, open an issue or start a discussion in the repository.
 - [LICENSE](LICENSE): license terms for this project.
 - [theme/Root.tsx](theme/Root.tsx): custom Docusaurus theme component (sidebar UI).
 - [contribution.md](contribution.md): this contribution guide and guidelines.
-
