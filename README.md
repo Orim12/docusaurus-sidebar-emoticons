@@ -15,12 +15,6 @@ Adds sidebar emoticons based on document tags in a Docusaurus site.
 npm install sidebar-emoticon-plugin
 ```
 
-If the name is not available, publish and install with a scope:
-
-```bash
-npm install @orim12/sidebar-emoticon-plugin
-```
-
 ## Setup
 
 1. Add the plugin to your Docusaurus config with your tag-to-emoticon mappings:
