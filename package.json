@@ -1,7 +1,7 @@
 {
   "name": "sidebar-emoticon-plugin",
   "description": "Docusaurus plugin that adds emoticons to the sidebar.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "bin": {
     "sidebar-emoticon-plugin": "setup.js"
